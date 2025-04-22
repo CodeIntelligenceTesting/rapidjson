@@ -46,6 +46,9 @@ if(RAPIDJSON_USE_MEMBERSMAP)
     add_definitions(-DRAPIDJSON_USE_MEMBERSMAP=1)
 endif()
 
+find_package(cifuzz NO_SYSTEM_ENVIRONMENT_PATH)
+enable_fuzz_testing()
+
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
@@ -255,3 +258,5 @@ IF(CMAKE_INSTALL_DIR)
     INSTALL(TARGETS RapidJSON EXPORT RapidJSON-targets)
     INSTALL(EXPORT RapidJSON-targets DESTINATION ${CMAKE_INSTALL_DIR})
 ENDIF()
+
+add_subdirectory(cifuzz-spark)
